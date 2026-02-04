@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage[affil-it]{authblk} 
+\usepackage{etoolbox}
+\usepackage{lmodern}
+\usepackage[fontsize=12pt]{fontsize}
+\usepackage{setspace}
+\usepackage[backend=biber,
+style=numeric]{biblatex}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{amsmath,mathtools}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{%
+  language=Matlab,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{black}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+  frame=single,
+  breaklines=true,
+  tabsize=4
+}
+
+
+\title{DBS Extra Credit | Question 4 Part B }
+
+\author{Kaeshev Alapati}
+\date{Feb 2026}
+
+\begin{document}
+
+\maketitle
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+\onehalfspacing
+
+\setcounter{page}{1}
+
+\rhead{Page \thepage}
+
+
+\section{Question 4 part (b)}
+You are given the following set F of functional dependencies for a relation R(A,B,C,D,E).
+\begin{align}
+    F= \{\\
+    AB \longrightarrow CE,\\
+    A \longrightarrow D,\\
+    BE \longrightarrow D,\\
+    CDE \longrightarrow AB,\\
+    BC \longrightarrow DE\}
+\end{align}
+
+\subsection{b (Problem)}
+
+If we remove $AB \longrightarrow E$ from $\mathcal{F}$ does it change the closure of $\mathcal{F}$ (i.e. $\mathcal{F}^+$?
+
+To show this check wether $\mathcal{F} - \{AB \longrightarrow E\}$ implies $AB \longrightarrow E$. You can either use inference rules or demonstrate $\{AB\}^+$ in $\mathcal{F} - \{AB \longrightarrow E\{$.
+
+\subsection{b (Solution)}
+
+F becomes
+\begin{align}
+    F' = \{\\
+    AB \longrightarrow C,\\
+    A \longrightarrow D,\\
+    BE \longrightarrow D,\\
+    CDE \longrightarrow AB,\\
+    BC \longrightarrow DE\}
+\end{align}
+
+The most simple way to demonstrate if the removal changes $\mathcal{F}^+$ is to demonstrate $\{AB\}^+$.
+
+\begin{center}
+\begin{tabular}{ c c }
+ \textbf{Output} & \textbf{Rule} \\
+ $AB$ & beginning \\
+ $ABC$ & $AB \longrightarrow C$ \\
+ $ABCD$ & $A \longrightarrow D$ \\ 
+ $ABCDE$ & $BC \longrightarrow DE$.
+\end{tabular}
+\end{center}
+
+As the closure is $ABCDE$ (it encloses E) the removal does \textbf{not} change $\mathcal{F}^+$. The same input AB can achieve the same output CE. Even if the rule $AB \longrightarrow E$ is removed.
+
+
+Additionally this property can be demonstrated via inference rules demonstrated below.
+
+\begin{center}
+\begin{tabular}{ c c }
+ \textbf{Output} & \textbf{Rule} \\
+ $AB \longrightarrow C$ (1) & Given \\
+ $BC \longrightarrow DE$ (2) & Given \\
+ $AB \longrightarrow BC$ (3) & Reflexivity of B in (1) \\ 
+ $AB \longrightarrow DE$ (4) & Transitivity of (3) and (2). \\
+ $AB \longrightarrow E$ (5) & Decomposition of (4).
+\end{tabular}
+\end{center}
+
+We can see in (5) that using inference rules $AB \longrightarrow E$ can be recovered from $\mathcal{F} - \{AB \longrightarrow E\{$. This means that removing $AB \longrightarrow E$ does \textbf{not} change $\mathcal{F}^+$.
+\end{document}
